@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "f0616683-270b-440c-9d3a-a4fd54130807",
+		"name": "gdit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "408055"
+	},
+	"item": [
+		{
+			"name": "InitiateAuth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.InitiateAuth",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"AuthParameters\" : {\n      \"USERNAME\" : \"kyle5\",\n      \"PASSWORD\" : \"my_password\"\n   },\n   \"AuthFlow\" : \"USER_PASSWORD_AUTH\",\n   \"ClientId\" : \"6u0mbma30ctl0821e8jnhjp3ad\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.us-east-1.amazonaws.com",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.SignUp",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"ClientId\": \"6u0mbma30ctl0821e8jnhjp3ad\",\n   \"Password\": \"my_password\",\n   \"Username\": \"kyle5\",\n    \"UserAttributes\": [ \n        { \n            \"Name\": \"email\",\n            \"Value\": \"lewiskyler@gmail.com\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.us-east-1.amazonaws.com",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AdminConfirmSignUp",
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "service",
+							"value": "cognito-idp",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "AKIAUEDZQQNI4VMPC7DR",
+							"type": "string"
+						},
+						{
+							"key": "secretKey",
+							"value": "c10qLP90hBZajIMt7U5KDnoRUlDDgh9WVdKWjOXP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.AdminConfirmSignUp",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"ClientId\": \"6u0mbma30ctl0821e8jnhjp3ad\",\n   \"Username\": \"kyle3\",\n   \"UserPoolId\": \"us-east-1_piLjMXMkR\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.us-east-1.amazonaws.com",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RespondToAuthChallenge",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.RespondToAuthChallenge",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"ChallengeName\": \"NEW_PASSWORD_REQUIRED\",\n    \"ChallengeResponses\": {\n        \"NEW_PASSWORD\": \"my_new_password\", \n        \"USERNAME\": \"kyle\",\n        \"userAttributes.email\": \"lewiskyler@gmail.com\"\n    },\n\n    \"Session\": \"AYABeJHFcm4ZeqQZYjFMX6mzugEAHQABAAdTZXJ2aWNlABBDb2duaXRvVXNlclBvb2xzAAEAB2F3cy1rbXMAS2Fybjphd3M6a21zOnVzLWVhc3QtMTo3NDU2MjM0Njc1NTU6a2V5L2IxNTVhZmNhLWJmMjktNGVlZC1hZmQ4LWE5ZTA5MzY1M2RiZQC4AQIBAHgDHnKSW2nDRJSDSLf55TGFyX5On_wV32whMfiMxuCEIAFHF4vKuM_aSQ33SnfONsoPAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMIH2kBSN5G4U7Ft65AgEQgDtlwvxfQMcJggJPrukR1QEPR2yKI1UkHL7cgI11EurSa7o6Afh25vZHclo1xsytjAJKgGo57MNI-EGYXwIAAAAADAAAEAAAAAAAAAAAAAAAAABUD5XPwTn0YGZDhr4wgtr1_____wAAAAEAAAAAAAAAAAAAAAEAAAC6g-qOr-5xMNOwOi14_dkLOXRy80LW9elyIgGsgfuJNk_JGKNwdZzPMhJgAxtmZS74OF3HBq-NL3ogpl8uuQxUkWhjp6KJgGPftXNlEsXn4hEmqyIFF_-FI8cqAHXpoE2iBwyfLH_EY-WU2wHR5fB3HlPDhWLbq_8sUKEv3Cte4RJ0nKImQ59NBEbuYT3REtyTntvqCic94LXdrkmt7GTS3sLKB6OIeXJNkF5e_t8ruk68FL48bn515t9P0wd0kV89mActzzltbsos2A\",\n   \"ClientId\": \"6u0mbma30ctl0821e8jnhjp3ad\"\n   \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cognito-idp.us-east-1.amazonaws.com",
+					"protocol": "https",
+					"host": [
+						"cognito-idp",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
