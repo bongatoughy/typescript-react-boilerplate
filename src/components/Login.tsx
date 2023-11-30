@@ -4,18 +4,39 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../context";
+import { ROUTES } from "../api-routes";
 
 export default function Login() {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [usernameFieldValue, setUsernameFieldValue] = React.useState("");
+  const [passwordFieldValue, setPasswordFieldValue] = React.useState("");
   const [responseMessage, setResponseMessage] = React.useState("");
 
   const onLogin = async () => {
     console.log(process.env.HOST);
-    const response = await axios.get(process.env.HOST);
+    // const response = await axios.get(process.env.HOST);
+    // console.log({ response });
+    const base64Credentials = btoa(
+      usernameFieldValue + ":" + passwordFieldValue
+    );
+    const authHeader = `Basic ${base64Credentials}`;
+
+    // Axios request configuration
+    const config = {
+      headers: {
+        Authorization: authHeader,
+      },
+    };
+
+    // Make the API request
+    const response = await axios.get(process.env.HOST + ROUTES.LOGIN, config);
+    // console.log("Response:", response.data);
     console.log({ response });
-    setResponseMessage(response.data);
   };
+
+  const { isAuthenticated, setIsAuthenticated, username, setUsername } =
+    useContext(UserContext);
 
   return (
     <Box
@@ -31,16 +52,17 @@ export default function Login() {
         label="username"
         variant="outlined"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setUsername(event.target.value);
+          setUsernameFieldValue(event.target.value);
         }}
+        value={usernameFieldValue}
       />
       <TextField
         id="outlined-basic"
-        label="password"
+        label="passwordFieldValue"
         variant="outlined"
-        type="password"
+        type="passwordFieldValue"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setPassword(event.target.value);
+          setPasswordFieldValue(event.target.value);
         }}
       />
       <Stack spacing={2} direction="row">
@@ -49,8 +71,9 @@ export default function Login() {
         </Button>
       </Stack>
       <div>
+        {isAuthenticated && <h1>I am authenticated!</h1>}
         <h1>{username}</h1>
-        <h2>{password}</h2>
+        <h2>{passwordFieldValue}</h2>
         <h1>{responseMessage}</h1>
       </div>
     </Box>
