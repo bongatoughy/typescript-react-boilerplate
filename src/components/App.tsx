@@ -8,7 +8,7 @@ import { UserContext, defaultUserContext } from "../context";
 
 type AppProps = { num: number };
 
-export const App = ({ num }: AppProps) => {
+export const App = () => {
   const value = "My UserContext Value";
   return (
     <UserContext.Provider value={defaultUserContext}>
